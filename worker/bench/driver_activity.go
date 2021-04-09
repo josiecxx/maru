@@ -51,6 +51,7 @@ type (
 		BatchSize    int
 		Rate         int
 		Parameters   interface{}
+		TaskQueue    string
 	}
 	benchDriver struct {
 		ctx     context.Context
@@ -111,10 +112,14 @@ func (d *benchDriver) run() error {
 func (d *benchDriver) execute(iterationID int) error {
 	d.logger.Info("driver.execute starting", "workflowName", d.request.WorkflowName, "basedID", d.request.BaseID, "iterationID", iterationID)
 	workflowID := fmt.Sprintf("%s-%s-%d", d.request.WorkflowName, d.request.BaseID, iterationID)
+	queue := taskQueue
+	if d.request.TaskQueue != "" {
+		queue = d.request.TaskQueue
+	}
 	startOptions := client.StartWorkflowOptions{
 		ID:                       workflowID,
-		TaskQueue:                taskQueue,
-		WorkflowExecutionTimeout: 168 * time.Hour,
+		TaskQueue:                queue,
+		WorkflowExecutionTimeout: 168 * time.Second,
 		WorkflowTaskTimeout:      defaultWorkflowTaskStartToCloseTimeoutDuration,
 	}
 	_, err := d.client.ExecuteWorkflow(d.ctx, startOptions, d.request.WorkflowName, buildPayload(d.request.Parameters))

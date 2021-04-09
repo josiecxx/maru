@@ -43,6 +43,8 @@ Once the bench worker and target workflows are running, you can start a quick te
 
 ```
 tctl wf start --tq temporal-bench --wt bench-workflow --wtt 5 --et 1800 --if ./scenarios/basic-test.json --wid 1
+tctl wf start --tq temporal-bench --wt bench-workflow --wtt 5 --et 1800 --if ./scenarios/webhook-basic-test.json --wid 2
+tctl wf start --tq temporal-bench --wt bench-workflow --wtt 5 --et 1800 --if ./scenarios/webhook-basic-spike.json --wid 3
 ```
 
 This command starts a basic Bench workflow which in turns runs the Basic workflow six times. If everything is configured correctly, you should be able to see those workflows in Web UI:

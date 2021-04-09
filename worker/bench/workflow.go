@@ -62,6 +62,8 @@ type (
 		Name string `json:"name"`
 		// Args is the argument that should be the input of all executions of the workflow under test.
 		Args interface{} `json:"args"`
+		// Queue to dump the spawned workflow, or default to 'temporal-bench'
+		Queue string `json:"queue"`
 	}
 	benchWorkflowRequestReporting struct {
 		// IntervalInSeconds defines the granularity of the result histogram.
@@ -147,6 +149,7 @@ func (w *benchWorkflow) executeDriverActivities(stepIndex int, step benchWorkflo
 				Rate:         step.RatePerSecond / concurrency,
 				WorkflowName: w.request.Workflow.Name,
 				Parameters:   w.request.Workflow.Args,
+				TaskQueue:		w.request.Workflow.Queue,
 			}))
 	}
 

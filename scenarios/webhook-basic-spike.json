@@ -1,0 +1,23 @@
+{
+    "steps": [{
+        "count": 100,
+        "ratePerSecond": 5
+    },{
+        "count": 1000,
+        "ratePerSecond": 50,
+        "concurrency": 10
+    },{
+        "count": 100,
+        "ratePerSecond": 5
+    }],
+    "workflow": {
+        "name": "WebhookWorkflow",
+        "queue": "WEBHOOK_TASK_QUEUE",
+        "args": {
+            "webhookUrl": "https://webhook.site/90af47bd-aef0-4b61-8883-b3a3da7f03a5"
+        }
+    },
+    "report": {
+        "intervalInSeconds": 5
+    }
+}

@@ -8,7 +8,7 @@ PROGS = temporal-bench \
 
 TEST_ARG ?= -race -v -timeout 5m
 
-NAMESPACE ?= benchtest
+NAMESPACE ?= default
 NAMESPACE_RETENTION ?= 1
 FRONTEND_ADDRESS ?= 127.0.0.1:7233
 NUM_DECISION_POLLERS ?= 10
